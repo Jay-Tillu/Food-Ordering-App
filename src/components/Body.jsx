@@ -1,6 +1,5 @@
 import React from "react";
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
 import { useState, useEffect } from "react";
 
 function Body() {
@@ -25,8 +24,9 @@ function Body() {
     );
 
     const json = await data.json();
-    setListOfRestaurant(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
-    // console.log(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    setListOfRestaurant(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   return (
@@ -36,7 +36,7 @@ function Body() {
           className="filter-btn"
           onClick={() => {
             const filteredList = listOfRestaurant.filter(
-              (res) => res.avgRatingString > 4.0
+              (res) => res.avgRating > 4.3
             );
             setListOfRestaurant(filteredList);
           }}
@@ -46,7 +46,6 @@ function Body() {
       </div>
       <div className="res-container">
         {listOfRestaurant.map((restaurant) => (
-          // console.log(restaurant.info.id)
           <RestaurantCard resData={restaurant} key={restaurant.info.id} />
         ))}
       </div>
