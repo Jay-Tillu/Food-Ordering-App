@@ -4,7 +4,17 @@ import resList from "../utils/mockData";
 import { useState } from "react";
 
 function Body() {
+
+  // useState gives us back Array. And we destructure it on the fly.
+  // This code and original useState code that we use is same.
+  // const array = useState(resList);
+  // const listOfRestaurant = array[0];
+  // const setListOfRestaurant = array[1];
+  
+  // Why we need the second setState function?
+  // Because React needs some trigger, so that it can start the Diff Algorithm.
   const [listOfRestaurant, setListOfRestaurant] = useState(resList);
+  
   return (
     <div className="body">
       <div className="filter">
