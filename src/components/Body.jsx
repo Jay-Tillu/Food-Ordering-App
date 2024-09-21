@@ -1,6 +1,7 @@
 import React from "react";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 function Body() {
   // useState gives us back Array. And we destructure it on the fly.
@@ -16,7 +17,7 @@ function Body() {
   // useEffect always called as soon as component renders.
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   const fetchData = async () => {
     const data = await fetch(
@@ -29,14 +30,16 @@ function Body() {
     );
   };
 
-  return (
+  return listOfRestaurant.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
         <button
           className="filter-btn"
           onClick={() => {
             const filteredList = listOfRestaurant.filter(
-              (res) => res.avgRating > 4.3
+              (res) => res.info.avgRating > 4.3
             );
             setListOfRestaurant(filteredList);
           }}
@@ -46,7 +49,7 @@ function Body() {
       </div>
       <div className="res-container">
         {listOfRestaurant.map((restaurant) => (
-          <RestaurantCard resData={restaurant} key={restaurant.info.id} />
+          <RestaurantCard resData={restaurant.info} key={restaurant.info.id} />
         ))}
       </div>
     </div>
