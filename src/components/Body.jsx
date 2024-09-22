@@ -75,7 +75,7 @@ function Body() {
       </div>
       <div className="res-container">
         {filteredListOfRestro.map((restaurant) => (
-          <RestaurantCard resData={restaurant.info} key={restaurant.info.id} />
+          <RestaurantCard resData={restaurant} key={restaurant.info.id} />
         ))}
       </div>
     </div>
