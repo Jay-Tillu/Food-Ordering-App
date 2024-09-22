@@ -13,6 +13,8 @@ function Body() {
   // Why we need the second setState function?
   // Because React needs some trigger, so that it can start the Diff Algorithm.
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [filteredListOfRestro, setFilteredListOfRestro] = useState([]);
 
   // useEffect always called as soon as component renders.
   useEffect(() => {
@@ -28,6 +30,9 @@ function Body() {
     setListOfRestaurant(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    setFilteredListOfRestro(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   return listOfRestaurant.length === 0 ? (
@@ -35,6 +40,27 @@ function Body() {
   ) : (
     <div className="body">
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              const filteredRestaurant = listOfRestaurant.filter((res) =>
+                res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              );
+              console.log(filteredRestaurant);
+              setFilteredListOfRestro(filteredRestaurant);
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className="filter-btn"
           onClick={() => {
@@ -48,7 +74,7 @@ function Body() {
         </button>
       </div>
       <div className="res-container">
-        {listOfRestaurant.map((restaurant) => (
+        {filteredListOfRestro.map((restaurant) => (
           <RestaurantCard resData={restaurant.info} key={restaurant.info.id} />
         ))}
       </div>

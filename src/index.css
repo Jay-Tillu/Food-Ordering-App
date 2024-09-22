@@ -46,7 +46,6 @@
 .filter-btn {
   cursor: pointer;
   margin: 10px;
-  padding: 10px;
 }
 
 .res-logo {
@@ -68,4 +67,13 @@
 .login {
   padding: 0 30px;
   cursor: pointer;
+}
+
+.filter {
+  display: flex;
+}
+
+.search {
+  margin: 10px;
+
 }
