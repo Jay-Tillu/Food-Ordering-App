@@ -1,8 +1,9 @@
 import React from "react";
 import logo from "../assets/logo.png";
+import { useState } from "react";
 
 function Header() {
-  let btnName = "Login";
+  const [btnName, setBtnName] = useState("Login");
 
   return (
     <div className="header">
@@ -15,15 +16,14 @@ function Header() {
           <li>About us</li>
           <li>Contact us</li>
           <li>Cart</li>
-          {/* <button
+          <button
             className="login"
             onClick={() => {
-              btnName = "Logout";
-              console.log(btnName);
+              btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
             }}
           >
             {btnName}
-          </button> */}
+          </button>
         </ul>
       </div>
     </div>
